@@ -10,6 +10,86 @@ int main() {
     // Sugestão: Posicione dois navios no tabuleiro, um verticalmente e outro horizontalmente.
     // Sugestão: Utilize `printf` para exibir as coordenadas de cada parte dos navios.
 
+    char tabuleiro[10][10];
+    int navio01 [3] = {3, 3, 3}; //Navio (coluna 2)
+    int navio02 [3] = {3, 3, 3}; //Navio (linha 8)
+    int vertical = 1;
+    int horizontal = 7;
+    int posicao = 2;
+    int posicao_vazio_vertical = 1, posicao_vazio_horizontal = 1;
+
+
+    // Preenchendo o tabuleiro com '0' 
+    printf("\n");
+            
+    for (int i = 0; i < 10; i++) {
+        for (int j = 0; j < 10; j++) {
+            tabuleiro[i][j] = '0';
+        }
+    }
+
+    for (int i = 0; i < 3; i++){
+        if (tabuleiro[i][vertical]!= '0'){ //verifica o espaço na vertical
+            posicao_vazio_vertical = 0;
+            break;
+        }
+    }
+    //Coloca navio01 na coluna 2 verticalmente
+    if (posicao_vazio_vertical){
+        for (int i = 0; i < 3; i++){        
+        tabuleiro[i][vertical] = navio01[i] + '0'; 
+        }
+    }else {
+        printf("Erro: sobreposicação detectada no navio vertical\n");
+    }
+
+    for (int j = 0; j < 3; j++){        
+        if (tabuleiro[horizontal][posicao + j] != '0'){ //verifica o espaço na horizontal
+            posicao_vazio_horizontal = 0;
+            break;
+        }             
+    }
+    //Coloca navio02 na linha 8 horizontalmente
+    if (posicao_vazio_horizontal){
+        for (int j = 0; j < 3; j++){        
+            tabuleiro[horizontal][posicao + j] = navio02[j] + '0'; 
+        }
+    }else {
+        printf("Erro: sobreposicação detectada no navio horizontal\n");
+    }
+    
+    
+
+    // Imprimindo o tabuleiro
+    printf("  ");
+    for(char c = 'A'; c <= 'J'; c++){
+        printf("%c ", c);
+    }
+    printf("\n");
+
+    for (int i = 0; i < 10; i++) {
+        printf("%d ", i);
+        for (int j = 0; j < 10; j++) {
+            printf("%c ", tabuleiro[i][j]);                      
+        }
+        printf("\n");
+        
+    }
+printf("\n");    
+printf("O Navio 01 está na posição ");
+for (int i = 0; i < 3; i++){
+    char letra_coluna = 'A' + vertical;
+    printf("%c%d", letra_coluna, i);
+    if (i < 2) printf(", ");
+}
+printf("\nO Navio 02 está na posição ");
+for (int j = 0; j < 3; j++){
+    char letra_coluna = 'A' + (posicao + j);
+    printf("%c%d", letra_coluna, horizontal);
+    if (j < 2) printf(", ");
+}
+printf("\n");
+
     // Nível Aventureiro - Expansão do Tabuleiro e Posicionamento Diagonal
     // Sugestão: Expanda o tabuleiro para uma matriz 10x10.
     // Sugestão: Posicione quatro navios no tabuleiro, incluindo dois na diagonal.
